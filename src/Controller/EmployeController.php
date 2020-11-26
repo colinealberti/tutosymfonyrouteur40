@@ -23,6 +23,8 @@ class EmployeController extends AbstractController
      * @Route(
      *      path= "employe/{id}",
      *      name="employe_voir",
+     *      defaults={"id":99},
+     *      requirements = {"id":"\d+"}     *
      *         )     *
      */
     public function voir(int $id){
@@ -36,11 +38,21 @@ class EmployeController extends AbstractController
      *      "employeV2/{id}",
      *      name="voirV2"    *
      *         )
-     * @Template("employe/voirEmploye.html.twig")
+     * @Template("employe/voir.html.twig")
      */
     public function voirEmployeV2($id){
         return array(
             'id' => $id
         );
+    }
+    
+    /**
+     * @Route("employe/{nom}", name="employe", requirements = {"nom":"^[B][a-z]"})
+     * @Template("employe/voirNom.html.twig")
+     */
+    public function voirNom(string $nom){
+        return $this->render('employe/voirNom.html.twig', [
+                    'nom' => $nom, 
+        ]);
     }
 }
